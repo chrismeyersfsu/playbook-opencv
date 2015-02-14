@@ -1,0 +1,20 @@
+---
+- name: Install dependencies
+  sudo: yes
+  apt: "name='{{ item }}' state=installed update_cache=yes"
+  with_items: opencv_dependencies
+
+- get_url: "url='{{ opencv_src_url }}' dest='{{ opencv_src_file }}'"
+  # -n means don't ask to over-write, just skip
+- command: "unzip -n {{ opencv_src_file }}"
+- file: "path='{{ opencv_src_dir }}/{{ opencv_src_build_dir }}' state=directory recurse=false"
+- command: "cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D BUILD_PYTHON_SUPPORT=ON -D BUILD_EXAMPLES=ON .."
+  args:
+    chdir: "{{ opencv_src_dir }}/{{ opencv_src_build_dir }}"
+- command: make
+  args:
+    chdir: "{{ opencv_src_dir }}/{{ opencv_src_build_dir }}"
+- command: "make install"
+  sudo: yes
+  args:
+    chdir: "{{ opencv_src_dir }}/{{ opencv_src_build_dir }}"

@@ -1,0 +1,5 @@
+- name: Install OpenCV
+  hosts: all
+  remote_user: pi
+  roles:
+    - { role: common }

@@ -1,0 +1,7 @@
+---
+- lineinfile: "dest={{ opencv_conf_file }} regexp='^/usr/local/lib' line='/usr/local/lib' create=yes"
+  sudo: yes
+- lineinfile: "dest='{{ opencv_bashrc_file }}' create=yes regexp='^PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig' line='PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig'"
+  sudo: yes
+- lineinfile: "dest='{{ opencv_bashrc_file }}' regexp='^export PKG_CONFIG_PATH' line='export PKG_CONFIG_PATH'"
+  sudo: yes
