@@ -1,4 +1,4 @@
 ---
 ansible_ssh_user: pi
-ansible_ssh_pass: pi
-ansible_sudo_pass: pi
+ansible_ssh_pass: raspberry
+ansible_sudo_pass: startx
